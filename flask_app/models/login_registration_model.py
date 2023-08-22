@@ -9,7 +9,7 @@ bcrypt = Bcrypt(app)
 Email_REGEX = re.compile(r'^[a-zA-Z0-9.+-]+@[a-zA-Z0-9._-]+.[a-zA-Z]+$')
 password_REGEX = re.compile("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,15}$")
 
-db = ''
+db = 'group_proj_schema'
 
 class User:
     def __init__(self, data):
@@ -73,5 +73,4 @@ class User:
     def validate_login(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         results = connectToMySQL(db).query_db(query, data)
-        print('cls-results-0-----0-', cls(results[0]))
-        return cls(results[0])
+        return results
