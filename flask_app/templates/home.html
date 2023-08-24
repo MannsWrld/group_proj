@@ -32,26 +32,8 @@
             bottom: 0;
             width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
         }
 
         .dark-mode-switch {
@@ -61,7 +43,7 @@
         }
 
         .switch-label {
-            margin-left: 8px;
+            margin-right: 8px;
         }
 
         .switch {
@@ -69,7 +51,6 @@
             display: inline-block;
             width: 40px;
             height: 20px;
-            margin-left: 10px;
         }
 
         .slider {
@@ -130,6 +111,7 @@
                     <div class="d-flex justify-content-between">
                         <button type="button" class="btn btn-primary">Edit</button>
                         <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-primary btn-block" action="/add_hospital">Register</button>
                     </div>
                 </div>
             </div>
@@ -144,6 +126,8 @@
                 <span class="slider"></span>
             </label>
         </div>
+        <a href="/home" class="btn btn-secondary">Home</a>
+        <p>&copy; 2023 MyWebsite. All rights reserved.</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
