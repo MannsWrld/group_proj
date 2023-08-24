@@ -113,22 +113,28 @@
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Patient Records</h3>
                     <form action="/edit" method="post">
+                        {% for user in users %}
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ user.first_name }} {{ user.last_name }}" readonly>
+                            <label for="name{{ loop.index }}" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name{{ loop.index }}" name="name" value="{{ user.first_name }} {{ user.last_name }}" {% if edit_mode %}readonly{% endif %}>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" readonly>
+                            <label for="email{{ loop.index }}" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email{{ loop.index }}" name="email" value="{{ user.email }}" {% if edit_mode %}readonly{% endif %}>
                         </div>
                         <div class="mb-3">
-                            <label for="record" class="form-label">Record</label>
-                            <textarea class="form-control" id="record" name="record" rows="4" readonly>{{ user.record }}</textarea>
+                            <label for="record{{ loop.index }}" class="form-label">Record</label>
+                            <textarea class="form-control" id="record{{ loop.index }}" name="record" rows="4" {% if edit_mode %}readonly{% endif %}>{{ user.record }}</textarea>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary">Edit</button>
+                            {% if edit_mode %}
+                            <button type="button" class="btn btn-success save-btn">Save</button>
+                            {% else %}
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            {% endif %}
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </div>
+                        {% endfor %}
                     </form>
                 </div>
             </div>
