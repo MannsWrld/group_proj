@@ -121,7 +121,7 @@
             <div class="col-md-6">
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Add Hospital</h3>
-                    <form action="/add_hospital" method="post">
+                    <form action="/create/hospital" method="post">
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Hospital Name</label>
                             <input type="text" class="form-control" id="hospitalName" name="hospital_name"
@@ -132,6 +132,7 @@
                             <input type="text" class="form-control" id="hospitalAddress" name="hospital_address"
                                 placeholder="Enter hospital address">
                         </div>
+                        <input type="hidden" name="user_id" value="{{session['user_id']}}">
                         <button type="submit" class="btn btn-primary btn-block">Add Hospital</button>
                     </form>
                 </div>
@@ -139,9 +140,9 @@
             <div class="col-md-6">
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Hospitals:</h3>
-                    {% for hosital in hospitals %}
+                    {% for hospital in hospitals %}
                         <div class="mb-3">
-                            <label for="dupFirstName" class="form-label">{{ hospital.name }}</label>
+                            <p>Name:{{hospital.hospital_name}} Address:{{hospital.hospital_address}}</p>
                         </div>
                     {% endfor %}
                 </div>

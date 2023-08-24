@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +10,6 @@
             background-color: #f8f9fa;
         }
 
-<<<<<<< Updated upstream
-        .dark-mode {
-            background-color: #212529;
-        }
-
-=======
->>>>>>> Stashed changes
         .container {
             margin-top: 100px;
         }
@@ -30,20 +19,7 @@
             background-color: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             padding: 30px;
-<<<<<<< Updated upstream
-            color: #333; /* Font color for light mode */
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-=======
             color: #333;
->>>>>>> Stashed changes
         }
 
         .footer {
@@ -64,18 +40,10 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-<<<<<<< Updated upstream
-            margin-right: 10px;
-        }
-
-        .switch-label {
-            margin-left: 8px;
-=======
         }
 
         .switch-label {
             margin-right: 8px;
->>>>>>> Stashed changes
         }
 
         .switch {
@@ -83,10 +51,6 @@
             display: inline-block;
             width: 40px;
             height: 20px;
-<<<<<<< Updated upstream
-            margin-left: 10px;
-=======
->>>>>>> Stashed changes
         }
 
         .slider {
@@ -120,7 +84,6 @@
         input:checked + .slider:before {
             transform: translateX(20px);
         }
-
         input {
             display: none;
         }
@@ -132,51 +95,24 @@
             <div class="col-md-6">
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Patient Records</h3>
-<<<<<<< Updated upstream
-                    <form action="/edit" method="post">
-                        {% for user in users %}
+                    <form action="/submit/user_info" method="post">
                         <div class="mb-3">
-                            <label for="name{{ loop.index }}" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name{{ loop.index }}" name="name" value="{{ user.first_name }} {{ user.last_name }}" {% if edit_mode %}readonly{% endif %}>
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" >
                         </div>
                         <div class="mb-3">
-                            <label for="email{{ loop.index }}" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email{{ loop.index }}" name="email" value="{{ user.email }}" {% if edit_mode %}readonly{% endif %}>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" >
                         </div>
                         <div class="mb-3">
-                            <label for="record{{ loop.index }}" class="form-label">Record</label>
-                            <textarea class="form-control" id="record{{ loop.index }}" name="record" rows="4" {% if edit_mode %}readonly{% endif %}>{{ user.record }}</textarea>
+                            <label for="record" class="form-label">Record</label>
+                            <textarea class="form-control" id="record" name="record" rows="4" placeholder="Input Information" ></textarea>
                         </div>
+                        <input type="hidden" name="user_id" value="{{session['user_id']}}">
                         <div class="d-flex justify-content-between">
-                            {% if edit_mode %}
-                            <button type="button" class="btn btn-success save-btn">Save</button>
-                            {% else %}
-                            <button type="button" class="btn btn-primary">Edit</button>
-                            {% endif %}
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                        {% endfor %}
+                            <button class="btn btn-primary">Create</button>
                     </form>
-=======
-                    <a href="/add_hospital">+Create Hospital</a>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" readonly>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="record" class="form-label">Record</label>
-                        <textarea class="form-control" id="record" name="record" rows="4" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <a class="btn btn-primary" href="#">Edit</a>
-                        <a class="btn btn-danger" href="#">Delete</a>
-                        <a class="btn btn-primary btn-block" href="/new/information">Register</a>
-                    </div>
->>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -190,13 +126,8 @@
                 <span class="slider"></span>
             </label>
         </div>
-<<<<<<< Updated upstream
-        <a href="/logout" class="btn btn-primary">Logout</a>
-        <p>&copy; 2023 NetRunners. All rights reserved.</p>
-=======
         <a href="/home" class="btn btn-secondary">Home</a>
         <p>&copy; 2023 MyWebsite. All rights reserved.</p>
->>>>>>> Stashed changes
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
