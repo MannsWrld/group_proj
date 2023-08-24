@@ -22,3 +22,7 @@ def submit_info():
 def delete_records():
     Records.delete_records
     return redirect('/login_page')
+
+@app.route('/edit_records', methods=['POST'])
+def edit_records():
+    return redirect('/edit_record.html')
