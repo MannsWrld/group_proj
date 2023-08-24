@@ -7,7 +7,7 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def main_page():
-    return render_template('login.html', users = User.get_all_users())
+    return render_template('login.html')
 
 @app.route('/login_page')
 def login_page():
