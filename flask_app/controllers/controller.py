@@ -15,7 +15,7 @@ def login_page():
 
 @app.route('/register_page')
 def register_page():
-    return render_template('register.html')
+    return render_template('register.html', form_data={})
 
 @app.route('/home')
 def home():
@@ -24,9 +24,16 @@ def home():
 @app.route('/register', methods=['POST'])
 def register():
     if not User.validate_user(request.form):
-        return redirect('/')
+        flash('Registration failed. Please correct the errors below.')
+        return render_template('register.html', form_data=request.form)
 
-    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    password = request.form['password']
+
+    if len(password) < 8:
+        flash('Password must be at least 8 characters long')
+        return render_template('register.html', form_data=request.form)
+
+    pw_hash = bcrypt.generate_password_hash(password)
 
     user_data = {
         'first_name': request.form['first_name'],
@@ -62,3 +69,4 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
+

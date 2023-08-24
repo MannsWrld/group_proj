@@ -20,6 +20,24 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+    @staticmethod
+    def validate_user(data):
+        print('data', data)
+        is_valid = True
+        if len(data['first_name']) < 2:
+            flash('First name must be more than two characters')
+            print('first name not good')
+            is_valid = False
+        if len(data['email']) < 5:  
+            flash('Email must be at least 5 characters long')
+            print('email no good')
+            is_valid = False
+        if not re.search(password_REGEX, data['password']):
+            flash('Password must be 8 characters long')
+            print('Password no good')
+            is_valid = False
+        print('validations complete')
+        return is_valid
 
     @classmethod
     def get_all_users(cls):
@@ -36,25 +54,6 @@ class User:
         query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);'
         db_response = connectToMySQL(db).query_db(query, data)
         return db_response
-    
-    @staticmethod
-    def validate_user(data):
-        print('data', data)
-        is_valid = True
-        if len(data['first_name']) < 1:
-            flash('First name must be more than one character')
-            print('first name not good')
-            is_valid = False
-        if not Email_REGEX.match(data['email']):
-            flash('Invalid Email and/or Password')
-            print('email no good')
-            is_valid = False
-        if not re.search(password_REGEX, data['password']):
-            flash('Password does not meet requirements')
-            print('Password no good')
-            is_valid = False
-        print('validations complete')
-        return is_valid
     
     @classmethod
     def find_user(cls, user_email):
@@ -73,4 +72,8 @@ class User:
     def validate_login(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         results = connectToMySQL(db).query_db(query, data)
-        return results
+    
+        if results:  
+            return cls(results[0])  
+        else:
+            return None  

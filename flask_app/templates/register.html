@@ -24,7 +24,8 @@
             background-color: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             padding: 30px;
-            color: #333; /* Font color for light mode */
+            color: #333;
+            /* Font color for light mode */
         }
 
         .btn-primary {
@@ -100,11 +101,11 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: #007bff;
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(20px);
         }
 
@@ -121,10 +122,13 @@
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Create an Account</h3>
                     <form action="/register" method="post">
+                        {% for message in get_flashed_messages() %}
+                        <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
                         <div class="mb-3">
                             <label for="firstName" class="form-label">First Name</label>
                             <input type="text" class="form-control" id="firstName" name="first_name"
-                                placeholder="Enter your first name">
+                                placeholder="Enter your first name" value="{{ form_data.first_name }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="lastName" class="form-label">Last Name</label>
