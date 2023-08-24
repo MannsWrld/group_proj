@@ -109,9 +109,15 @@
                         <textarea class="form-control" id="record" name="record" rows="4" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="submit" class="btn btn-primary btn-block" action="/add_hospital">Add Hospital</button>
+                        <form action="/edit">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>
+                        <form action="/delete_records">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                        <form action="/add_hospital">
+                            <button type="submit" class="btn btn-primary">Add Hospital</button>
+                        </form>
                     </div>
                 </div>
             </div>

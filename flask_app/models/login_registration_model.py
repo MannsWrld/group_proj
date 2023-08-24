@@ -73,8 +73,5 @@ class User:
     def validate_login(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         results = connectToMySQL(db).query_db(query, data)
-        
-        if results:
-            return cls(results[0])
-        else:
-            return results
+        print('cls-results-0-----0-', cls(results[0]))
+        return cls(results[0])
