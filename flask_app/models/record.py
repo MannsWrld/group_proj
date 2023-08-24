@@ -1,4 +1,4 @@
-from flask_app.config.mysqlconnections import connectToMySQL
+from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import login_registration_model
 import pprint
 from flask_app import app
@@ -10,19 +10,16 @@ class Records:
     def __init__(self,data):
         self.id = data["id"],
         self.name = data["name"],
-        self.allergies = data["allergies"],
-        self.birthday = data["birthday"],
-        self.bloodtype = data["bloodtype"],
-        self.sickness = data["sickness"],
-        self.medication = data["medication"],
+        self.allergies = data["record"],
+        self.user_id = data["user_id"],
         self.created_at = data["created_at"],
         self.updated_at = data["updated_at"],
         self.patient = []
     
     @classmethod
     def create_record(cls,data):
-        query = """ INSERT INTO records (name,allergies,birthday,bloodtype,sickness,medication)
-                VALUES (%(name)s,%(allergies)s,%(birthday)s,%(bloodtype)s,%(sickness)s,%(medication)s)
+        query = """ INSERT INTO records (name,record,user_id)
+                VALUES (%(name)s,%(records)s,%(user_id)s)
         """
         results = connectToMySQL(db).query_db(query,data)
         pprint.pprint(results)
@@ -42,9 +39,7 @@ class Records:
     
     @classmethod
     def update_records(cls,data):
-        query = """ UPDATE records SET name = %(name)s, allergies = %(allergies)s,
-                    birthday = %(birthday)s, bloodtype = %(bloodtype)s, sickness = %(sickness)s,
-                    medication = %(medication)s
+        query = """ UPDATE records SET name = %(name)s,record = %(record)s
                     WHERE id = %(id)s;
                 """
         results = connectToMySQL(db).query_db(query,data)
