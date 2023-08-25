@@ -56,16 +56,19 @@ class Records:
             WHERE id = %(record_id)s;
             """
         params = {'record_id': record_id}
+        print('record-id', record_id)
         results = connectToMySQL(db).query_db(query, params)
         return results
     
     @classmethod
-    def get_record_by_user_id(cls, data):
+    def get_record_by_user_id(cls, user_id):
         query = '''SELECT record
                 FROM records
                 WHERE user_id = %(user_id)s;
                 '''
+        data = {'user_id': user_id}
         results = connectToMySQL(db).query_db(query, data)
+        print("Record data from query:", results)  # Add this line for debugging
         return results
     
     @classmethod

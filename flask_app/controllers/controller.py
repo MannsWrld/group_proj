@@ -14,6 +14,23 @@ def main_page():
 def login_page():
     return render_template('login.html')
 
+@app.route('/login', methods=["POST"])
+def login():
+    user = User.validate_login(request.form)  
+
+    if not user:
+        flash('Invalid Email or Password')
+        return redirect('/')
+
+    if not bcrypt.check_password_hash(user.password, request.form['password']):
+        flash("Invalid Email or Password")
+        return redirect('/')
+
+    session['user_id'] = user.id
+    session['user_name'] = user.first_name
+
+    return redirect('/home')
+
 @app.route('/register_page')
 def register_page():
     return render_template('register.html')
@@ -21,6 +38,7 @@ def register_page():
 @app.route('/home')
 def home():
     user_id = session['user_id']
+    print('user-id', user_id)
     user = User.get_user_by_id(user_id)
     record = Records.get_record_by_user_id(user_id)
     print("Query data:", user , record)  # Added this line for debugging
@@ -44,23 +62,6 @@ def register():
     user_id = User.create_user(user_data)
     session['user_id'] = user_id
     session['user_name'] = request.form['first_name']
-
-    return redirect('/home')
-
-@app.route('/login', methods=["POST"])
-def login():
-    user = User.validate_login(request.form)  
-
-    if not user:
-        flash('Invalid Email or Password')
-        return redirect('/')
-
-    if not bcrypt.check_password_hash(user.password, request.form['password']):
-        flash("Invalid Email or Password")
-        return redirect('/')
-
-    session['user_id'] = user.id
-    session['user_name'] = user.first_name
 
     return redirect('/home')
 

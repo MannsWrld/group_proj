@@ -126,7 +126,7 @@
                             <input type="hidden" name="user_id" value="{{ user.id }}">
                             <div class="mb-3">
                                 <label for="record" class="form-label">Record</label>
-                                <textarea class="form-control" id="record" name="record" rows="4">{{ record }}</textarea>
+                                <textarea class="form-control" id="record" name="record" rows="4">{{ record[0]['record'] }}</textarea>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-success">Save</button>

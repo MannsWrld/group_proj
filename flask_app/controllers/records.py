@@ -21,8 +21,9 @@ def submit_info():
 @app.route('/delete_records', methods=['POST'])
 def delete_records():
     record_id = request.form.get('record_id')
+    print('record--id', record_id)
     Records.delete_record(record_id)
-    return redirect('/home')
+    return redirect('/login_page')
 
 @app.route('/edit_records/<user_id>', methods=['POST'])
 def edit_records(user_id):
