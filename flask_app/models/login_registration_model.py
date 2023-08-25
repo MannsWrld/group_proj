@@ -70,6 +70,17 @@ class User:
         return cls(db_response[0])
 
     @classmethod
+    def get_user_by_id(cls, user_id):
+        query = "SELECT * FROM users WHERE id = %(user_id)s;"
+        data = {
+            "user_id": user_id
+        }
+        result = connectToMySQL(db).query_db(query, data)
+        if result:
+            return cls(result[0])
+        return None
+
+    @classmethod
     def validate_login(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s;'
         results = connectToMySQL(db).query_db(query, data)

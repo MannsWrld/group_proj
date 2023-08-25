@@ -18,11 +18,31 @@ def submit_info():
     Records.create_record(data)
     return redirect('/home')
 
-@app.route('/delete_records')
+@app.route('/delete_records', methods=['POST'])
 def delete_records():
-    Records.delete_records
+    user_id = session['user_id']
+    Records.delete_records(user_id)
     return redirect('/login_page')
 
-@app.route('/edit_records', methods=['POST'])
-def edit_records():
-    return redirect('/edit_record.html')
+@app.route('/edit_records/<user_id>', methods=['POST'])
+def edit_records(user_id):
+    user = User.get_user_by_id(user_id)
+    return render_template('edit_record.html', user=user)
+
+@app.route('/save_record', methods=['POST'])
+def save_record():
+    user_id = request.form.get('user_id')
+    name = request.form['name']
+    email = request.form['email']
+    record = request.form['record']
+    
+    updated_data = {
+            'id': user_id,
+            'name': name,
+            'email': email,
+            'record': record
+        }
+    
+    Records.update_records(updated_data)
+    
+    return redirect('/home')

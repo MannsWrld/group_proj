@@ -40,7 +40,7 @@ class Records:
     
     @classmethod
     def update_records(cls,data):
-        query = """ UPDATE records SET name = %(name)s,email = %(email)s,record = %(record)s
+        query = """ UPDATE records SET name = %(name)s,record = %(record)s
                     WHERE id = %(id)s;
                 """
         results = connectToMySQL(db).query_db(query,data)
@@ -48,12 +48,30 @@ class Records:
         return results
     
     @classmethod
-    def delete_records(cls, record_id):
-        query = """ DELETE FROM records
-                WHERE id = %(id)s;
-            """
-        results = connectToMySQL(db).query_db(query,record_id)
-        pprint.pprint(results)
+    def delete_records(cls, user_id):
+        query = """
+            DELETE FROM records
+            WHERE user_id = %(user_id)s;
+        """
+        params = {'user_id': user_id}
+        results = connectToMySQL(db).query_db(query, params)
+        
+        user_query = """
+            DELETE FROM users
+            WHERE user_id = %(user_id)s;
+        """
+        user_params = {'user_id': user_id}
+        user_results = connectToMySQL(db).query_db(user_query, user_params)
+        
+        pprint.pprint(user_results)
+        return results, user_results
+    
+    @classmethod
+    def get_record_by_user_id(cls, user_id):
+        query = '''SELECT FROM records
+                WHERE user_id = %(user_id)s;
+                '''
+        results = connectToMySQL(db).query_db(query, user_id)
         return results
     
     @classmethod

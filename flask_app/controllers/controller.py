@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.login_registration_model import User
+from flask_app.models.record import Records
 from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
@@ -19,7 +20,10 @@ def register_page():
 
 @app.route('/home')
 def home():
-    return render_template('home.html') #may change html page
+    user_id = session['user_id']
+    user = User.get_user_by_id(user_id)
+    record = Records.get_record_by_user_id(user_id)
+    return render_template('home.html', user = user, record = record) #may change html page
 
 @app.route('/register', methods=['POST'])
 def register():

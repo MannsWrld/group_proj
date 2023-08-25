@@ -97,7 +97,6 @@
                 <div class="bg-white p-4 rounded-container">
                     <h3 class="mb-4">Patient Records</h3>
                     <a href="/add_hospital">+Create Hospital</a>
-                    {% for user in users %}
                     <div class="mb-3">
                         <label for="name" class="form-label"> Name </label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ user.first_name}} {{ user.last_name }}" readonly>
@@ -108,18 +107,18 @@
                     </div>
                     <div class="mb-3">
                         <label for="record" class="form-label">Record</label>
-                        <textarea class="form-control" id="record" name="record" rows="4" readonly>{{user.record}}</textarea>
+                        <textarea class="form-control" id="record" name="record" rows="4" readonly>{{ record.record }}</textarea>
                     </div>
                     <div class="d-flex justify-content-between">
                         <form action="/edit_records/{{user.id}}" method="post">
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
-                        <form action="/delete_records">
+                        <form action="/delete_records" method="post">
+                            <input type="hidden" name="record_id" value="{{ user.id }}">
                             <button type="submit" class="btn btn-primary">Delete</button>
                         </form>
                         <a class="btn btn-primary btn-block" href="/new/information">Register Patient</a>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -133,7 +132,7 @@
                 <span class="slider"></span>
             </label>
         </div>
-        <a href="/home" class="btn btn-secondary">Home</a>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
         <p>&copy; 2023 MyWebsite. All rights reserved.</p>
     </div>
 
