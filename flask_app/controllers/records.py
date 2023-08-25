@@ -20,9 +20,9 @@ def submit_info():
 
 @app.route('/delete_records', methods=['POST'])
 def delete_records():
-    user_id = session['user_id']
-    Records.delete_records(user_id)
-    return redirect('/login_page')
+    record_id = request.form.get('record_id')
+    Records.delete_record(record_id)
+    return redirect('/home')
 
 @app.route('/edit_records/<user_id>', methods=['POST'])
 def edit_records(user_id):
@@ -33,17 +33,6 @@ def edit_records(user_id):
 @app.route('/save_record', methods=['POST'])
 def save_record():
     user_id = request.form.get('user_id')
-    name = request.form['name']
-    email = request.form['email']
     record = request.form['record']
-    
-    updated_data = {
-            'id': user_id,
-            'name': name,
-            'email': email,
-            'record': record
-        }
-    
-    Records.update_records(updated_data)
-    
+    Records.update_record(user_id, record)
     return redirect('/home')

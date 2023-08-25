@@ -121,14 +121,17 @@
                             <label for="email" class="form-label"> Email </label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="{{user.email}}">
                         </div>
-                        <div class="mb-3">
-                            <label for="record" class="form-label">Record</label>
-                            <textarea class="form-control" id="record" name="record" rows="4">{{ record.record}}</textarea>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-success" formaction="/save_record">Save</button>
-                        </div>
                     </form>
+                        <form action="/save_record" method="post">
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <div class="mb-3">
+                                <label for="record" class="form-label">Record</label>
+                                <textarea class="form-control" id="record" name="record" rows="4">{{ record }}</textarea>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

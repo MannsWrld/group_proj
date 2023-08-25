@@ -39,32 +39,25 @@ class Records:
         return records
     
     @classmethod
-    def update_records(cls,data):
-        query = """ UPDATE records SET name = %(name)s,record = %(record)s
-                    WHERE id = %(id)s;
-                """
-        results = connectToMySQL(db).query_db(query,data)
-        pprint.pprint(results)
+    def update_record(cls, user_id, record):
+        query = """
+            UPDATE records SET record = %(record)s
+            WHERE user_id = %(user_id)s;
+        """
+        data = {'user_id': user_id, 'record': record}
+        results = connectToMySQL(db).query_db(query, data)
         return results
+
     
     @classmethod
-    def delete_records(cls, user_id):
+    def delete_record(cls, record_id):
         query = """
             DELETE FROM records
-            WHERE user_id = %(user_id)s;
-        """
-        params = {'user_id': user_id}
+            WHERE id = %(record_id)s;
+            """
+        params = {'record_id': record_id}
         results = connectToMySQL(db).query_db(query, params)
-        
-        user_query = """
-            DELETE FROM users
-            WHERE user_id = %(user_id)s;
-        """
-        user_params = {'user_id': user_id}
-        user_results = connectToMySQL(db).query_db(user_query, user_params)
-        
-        pprint.pprint(user_results)
-        return results, user_results
+        return results
     
     @classmethod
     def get_record_by_user_id(cls, data):

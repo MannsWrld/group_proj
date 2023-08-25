@@ -107,14 +107,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="record" class="form-label">Record</label>
-                        <textarea class="form-control" id="record" name="record" rows="4" readonly>{{ record.record }}</textarea>
+                        <textarea class="form-control" id="record" name="record" rows="4" readonly>{{ record }}</textarea>
                     </div>
                     <div class="d-flex justify-content-between">
                         <form action="/edit_records/{{user.id}}" method="post">
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
                         <form action="/delete_records" method="post">
-                            <input type="hidden" name="record_id" value="{{ user.id }}">
+                            <input type="hidden" name="record_id" value="{{ record.id }}">
                             <button type="submit" class="btn btn-primary">Delete</button>
                         </form>
                         <a class="btn btn-primary btn-block" href="/new/information">Register Patient</a>
