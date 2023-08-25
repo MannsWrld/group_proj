@@ -10,7 +10,8 @@ class Records:
     def __init__(self,data):
         self.id = data["id"],
         self.name = data["name"],
-        self.allergies = data["record"],
+        self.record = data["record"],
+        self.email = data["email"],
         self.user_id = data["user_id"],
         self.created_at = data["created_at"],
         self.updated_at = data["updated_at"],
@@ -18,8 +19,8 @@ class Records:
     
     @classmethod
     def create_record(cls,data):
-        query = """ INSERT INTO records (name,record,user_id)
-                VALUES (%(name)s,%(records)s,%(user_id)s)
+        query = """ INSERT INTO records (name,record,email,user_id)
+                VALUES (%(name)s,%(record)s,%(email)s,%(user_id)s)
         """
         results = connectToMySQL(db).query_db(query,data)
         pprint.pprint(results)
@@ -39,7 +40,7 @@ class Records:
     
     @classmethod
     def update_records(cls,data):
-        query = """ UPDATE records SET name = %(name)s,record = %(record)s
+        query = """ UPDATE records SET name = %(name)s,email = %(email)s,record = %(record)s
                     WHERE id = %(id)s;
                 """
         results = connectToMySQL(db).query_db(query,data)
