@@ -27,7 +27,8 @@ def delete_records():
 @app.route('/edit_records/<user_id>', methods=['POST'])
 def edit_records(user_id):
     user = User.get_user_by_id(user_id)
-    return render_template('edit_record.html', user=user)
+    record = Records.get_record_by_user_id(user_id)
+    return render_template('edit_record.html', user=user, record = record)
 
 @app.route('/save_record', methods=['POST'])
 def save_record():

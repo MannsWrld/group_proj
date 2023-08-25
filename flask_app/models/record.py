@@ -67,11 +67,12 @@ class Records:
         return results, user_results
     
     @classmethod
-    def get_record_by_user_id(cls, user_id):
-        query = '''SELECT FROM records
+    def get_record_by_user_id(cls, data):
+        query = '''SELECT record
+                FROM records
                 WHERE user_id = %(user_id)s;
                 '''
-        results = connectToMySQL(db).query_db(query, user_id)
+        results = connectToMySQL(db).query_db(query, data)
         return results
     
     @classmethod
