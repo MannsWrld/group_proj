@@ -23,7 +23,9 @@ def home():
     user_id = session['user_id']
     user = User.get_user_by_id(user_id)
     record = Records.get_record_by_user_id(user_id)
-    return render_template('home.html', user = user, record = record) #may change html page
+    print("Query data:", user , record)  # Added this line for debugging
+    return render_template('home.html', user=user, record=record)
+
 
 @app.route('/register', methods=['POST'])
 def register():
